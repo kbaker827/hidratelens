@@ -15,5 +15,12 @@ export default defineConfig({
   ],
   test: {
     include: ["test/**/*.test.ts"],
+    coverage: {
+      provider: "istanbul",
+      include: ["src/worker/**", "public/lib/**"],
+      exclude: ["src/worker/types.ts"],
+      reporter: ["text", "html"],
+      thresholds: { lines: 80, functions: 80, branches: 80, statements: 80 },
+    },
   },
 });

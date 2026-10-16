@@ -11,5 +11,6 @@
     "checkJs": false,
     "skipLibCheck": true
   },
-  "include": ["src", "test", "public/lib", "*.ts"]
+  "include": ["src", "test", "public/lib", "*.ts"],
+  "exclude": ["test/e2e"]
 }
