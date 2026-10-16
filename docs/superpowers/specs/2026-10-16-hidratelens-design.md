@@ -1,7 +1,7 @@
-# SparkLens — Design Spec
+# HidrateLens — Design Spec
 
 **Date:** 2026-10-16
-**Status:** Draft, awaiting review
+**Status:** Approved 2026-10-16
 
 ## Goal
 
@@ -32,7 +32,7 @@ HidrateSpark bottle ──BLE──> HidrateSpark iOS app ──> Apple Health (
                               iOS Shortcut "Sync Hydration" (reads + sums today)
                                                           │  POST /api/intake (WRITE_TOKEN)
                                                           ▼
-                                     Cloudflare Worker ──> KV (SPARKLENS)
+                                     Cloudflare Worker ──> KV (HIDRATELENS)
                                        │   serves static Web App + GET /api/today
                                        ▼  (READ_TOKEN)
                               Ray-Ban Display Web App (polls every 60 s)
@@ -94,7 +94,7 @@ The response sets `Cache-Control: no-store`.
 ### Secrets and config
 
 - `WRITE_TOKEN` and `READ_TOKEN` are Worker secrets set with `wrangler secret put`. Both are different random values of at least 32 characters, and the README shows how to generate them.
-- KV namespace binding: `SPARKLENS`.
+- KV namespace binding: `HIDRATELENS`.
 - No secrets in the repo; `.dev.vars.example` documents local dev values.
 
 ## Glasses Web App
@@ -146,7 +146,7 @@ The response sets `Cache-Control: no-store`.
 ## Repo layout
 
 ```
-sparklens/
+hidratelens/
 ├── src/worker/            index.ts, intake.ts, today.ts, auth.ts, validate.ts
 ├── public/                index.html, app.js, style.css, lib/display.js
 ├── test/                  worker/*.test.ts, display.test.ts, e2e/smoke.spec.ts
