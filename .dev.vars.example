@@ -1,0 +1,3 @@
+# Copy to .dev.vars for `npm run dev`. Use long random values in production.
+WRITE_TOKEN=local-write-token-change-me-000000000
+READ_TOKEN=local-read-token-change-me-0000000000

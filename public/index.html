@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HidrateLens</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main id="display" hidden>
+      <div class="ring-wrap">
+        <svg class="ring" viewBox="0 0 280 280" aria-hidden="true">
+          <circle class="ring-track" cx="140" cy="140" r="120" />
+          <circle id="ring" class="ring-fill" cx="140" cy="140" r="120" />
+        </svg>
+        <p id="totals" class="totals" aria-live="polite"></p>
+      </div>
+      <p id="last-sip" class="last-sip"></p>
+      <p id="stale" class="stale" hidden></p>
+      <span id="offline" class="offline" title="Offline" hidden></span>
+    </main>
+    <p id="setup" class="setup" hidden>Open your setup link</p>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
