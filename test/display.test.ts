@@ -95,4 +95,30 @@ describe("viewModel", () => {
     expect(viewModel(snapshot({ syncedAt: minutesAgo(121) }), now, "oz").staleText).toMatch(/^Not synced since /);
     expect(viewModel(snapshot({ syncedAt: minutesAgo(120) }), now, "oz").staleText).toBeNull();
   });
+
+  it("uses the snapshot's time zone to decide today", () => {
+    // 1 AM on the 17th in Auckland, but still the 16th from the Americas through Europe.
+    const instant = new Date("2026-10-16T12:00:00Z");
+    const vm = viewModel(
+      snapshot({
+        date: "2026-10-17",
+        tz: "Pacific/Auckland",
+        syncedAt: new Date(instant.getTime() - 60_000).toISOString(),
+        lastDrinkAt: null,
+      }),
+      instant,
+      "oz",
+    );
+    expect(vm.totals).toBe("48 / 80 oz");
+  });
+
+  it("falls back to the local date for an unknown time zone", () => {
+    expect(viewModel(snapshot({ tz: "Not/AZone" }), now, "oz").totals).toBe("48 / 80 oz");
+  });
+
+  it("hides the stale line for a snapshot from another day", () => {
+    const vm = viewModel(snapshot({ date: "2026-10-15", syncedAt: minutesAgo(600) }), now, "oz");
+    expect(vm.staleText).toBeNull();
+    expect(vm.lastSip).toBe("No sync yet today");
+  });
 });

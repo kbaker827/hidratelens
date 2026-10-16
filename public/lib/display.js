@@ -42,8 +42,20 @@ export function lastSipText(lastDrinkAt, now) {
   return `Last sip ${Math.floor(minutes / HOUR_MINUTES)} hr ago`;
 }
 
-/** @param {Date} now @returns {string} YYYY-MM-DD in local time */
-export function localDateString(now) {
+/**
+ * @param {Date} now
+ * @param {string} [timeZone] IANA zone; falls back to the device's local time when missing or unknown
+ * @returns {string} YYYY-MM-DD
+ */
+export function localDateString(now, timeZone) {
+  if (timeZone) {
+    try {
+      // en-CA formats dates as YYYY-MM-DD.
+      return new Intl.DateTimeFormat("en-CA", { timeZone, year: "numeric", month: "2-digit", day: "2-digit" }).format(now);
+    } catch {
+      // Unknown zone: fall through to device-local date.
+    }
+  }
   const pad = (/** @type {number} */ n) => String(n).padStart(2, "0");
   return `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
 }
@@ -64,13 +76,14 @@ export function viewModel(snapshot, now, unit) {
   if (snapshot === null) {
     return { fraction: 0, goalMet: false, totals: totalsText(0, 0, unit), lastSip: "No sync yet today", staleText: null };
   }
-  if (snapshot.date !== localDateString(now)) {
+  // Judge "today" in the phone's zone so the glasses' clock settings can't zero a fresh reading.
+  if (snapshot.date !== localDateString(now, snapshot.tz)) {
     return {
       fraction: 0,
       goalMet: false,
       totals: totalsText(0, snapshot.goalMl, unit),
       lastSip: "No sync yet today",
-      staleText: staleText(snapshot.syncedAt, now),
+      staleText: null,
     };
   }
   return {

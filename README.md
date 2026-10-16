@@ -25,7 +25,7 @@ HidrateSpark bottle ──BLE──> HidrateSpark iOS app ──> Apple Health (
 ## Prerequisites
 
 - A Cloudflare account (the free plan is fine)
-- Node.js 20+
+- Node.js 22+ (Wrangler 4 requires it)
 - An iPhone with the HidrateSpark app syncing to Apple Health
 - Meta Ray-Ban Display glasses with developer preview access (Web Apps)
 
