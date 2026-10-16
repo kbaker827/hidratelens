@@ -76,6 +76,12 @@ The app saves the key and removes it from the address bar. Add `&unit=ml` to sho
 
 ## What you'll see
 
+| In progress | Goal met | Not synced lately |
+| :---: | :---: | :---: |
+| ![Ring 60% full showing 48 / 80 oz and Last sip 23 min ago](docs/images/progress.png) | ![Green full ring showing 83 / 80 oz](docs/images/goal-met.png) | ![Ring showing 30 / 80 oz with Not synced since 11:08 AM](docs/images/stale.png) |
+
+Black pixels are transparent on the glasses' display, so only the ring and text appear over your view.
+
 - **Ring:** today's total as a share of your goal. It turns green when you reach the goal.
 - **`48 / 80 oz`:** today's total and your goal.
 - **`Last sip 23 min ago`:** time since your newest drink. It shows `No water yet today` when there's nothing yet.
