@@ -1,0 +1,22 @@
+{
+  "name": "hidratelens",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "See your HidrateSpark water intake on Meta Ray-Ban Display glasses",
+  "license": "MIT",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "test": "vitest run",
+    "test:e2e": "playwright test"
+  },
+  "devDependencies": {
+    "@cloudflare/vitest-plugin": "^1.4.4",
+    "@cloudflare/workers-types": "^5.20261016.1",
+    "@playwright/test": "^1.64.1",
+    "typescript": "^7.0.2",
+    "vitest": "4.1",
+    "wrangler": "^4.151.1"
+  }
+}
